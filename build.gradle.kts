@@ -9,10 +9,8 @@ plugins {
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+kotlin {
+	jvmToolchain(17)
 }
 
 repositories {
@@ -20,6 +18,9 @@ repositories {
 }
 
 dependencies {
+	implementation(platform("software.amazon.awssdk:bom:2.25.29"))
+	implementation("software.amazon.awssdk:dynamodb-enhanced")
+
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.boot:spring-boot-starter-web")

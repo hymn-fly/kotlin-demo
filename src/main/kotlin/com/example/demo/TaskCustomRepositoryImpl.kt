@@ -1,5 +1,6 @@
 package com.example.demo
 
+import com.querydsl.core.BooleanBuilder
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
 
@@ -11,10 +12,11 @@ class TaskCustomRepositoryImpl(private val queryFactory: JPAQueryFactory): TaskC
         return data.fetch()
     }
 
-    override fun conditionQueryTest(contents: Set<String>): List<Task> {
-        val contentsCondition = QTask.task.contents.any().notIn(contents)
+    override fun conditionQueryTest(contents: Set<DaysOff>): List<Task> {
+        val builder = BooleanBuilder()
+        contents.forEach { builder.or(QTask.task.contents.contains(it.name)) }
 
-        val query = queryFactory.selectFrom(QTask.task).where(contentsCondition)
+        val query = queryFactory.selectFrom(QTask.task).where(builder)
         return query.fetch()
     }
 

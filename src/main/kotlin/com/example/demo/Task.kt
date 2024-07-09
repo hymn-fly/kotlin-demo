@@ -1,7 +1,6 @@
 package com.example.demo
 
 import jakarta.persistence.*
-import java.lang.reflect.Constructor
 
 @Entity
 @Table(name = "tasks")
@@ -13,8 +12,7 @@ data class Task(
 
     val description: String,
 
-    @Convert(converter = ContentConverter::class)
-    val contents: Set<String>
+    val contents: String
 ) {
 
     class ContentConverter(): AttributeConverter<Set<String>?, String?> {
@@ -30,5 +28,5 @@ data class Task(
         }
 
     }
-    internal constructor() : this(0, "", setOf())
+    internal constructor() : this(0, "", "")
 }

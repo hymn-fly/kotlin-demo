@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest
 class TaskCustomRepositoryTest(val taskCustomRepositoryImpl: TaskCustomRepository): FunSpec({
 
     test("test") {
-        val datas = taskCustomRepositoryImpl.queryData()
+        val datas = taskCustomRepositoryImpl.conditionQueryTest(setOf(DaysOff.MON, DaysOff.WED))
+
         datas.forEach(::println)
     }
 

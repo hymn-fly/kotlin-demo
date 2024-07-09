@@ -21,10 +21,10 @@ class DynamoDbRepository(val client: DynamoDbEnhancedClient, val objectMapper: O
         var sortKey: KProperty<*>? = null
         for (field in fields) {
             if (field.findAnnotations(DynamodbAnnotation.PartitionKey::class).isNotEmpty()) {
-                partitionKey = field;
+                partitionKey = field
             }
             if (field.findAnnotations(DynamodbAnnotation.SortKey::class).isNotEmpty()) {
-                sortKey = field;
+                sortKey = field
             }
         }
 
@@ -52,7 +52,7 @@ class DynamoDbRepository(val client: DynamoDbEnhancedClient, val objectMapper: O
         try {
             table.createTable()
         } catch (e: Exception) {
-            ; // do nothing
+            // do nothing
         }
         return DynamodbTable(table)
     }
